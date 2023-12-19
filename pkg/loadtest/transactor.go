@@ -8,21 +8,20 @@ import (
 	"sync"
 	"time"
 
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 	"github.com/gorilla/websocket"
-	"github.com/informalsystems/tm-load-test/internal/logging"
 )
 
 const (
 	connSendTimeout = 10 * time.Second
-	// see https://github.com/tendermint/tendermint/blob/v0.32.x/rpc/lib/server/handlers.go
-	connPingPeriod = (30 * 9 / 10) * time.Second
+	connPingPeriod  = (30 * 9 / 10) * time.Second
 
 	jsonRPCID = -1
 
 	defaultProgressCallbackInterval = 5 * time.Second
 )
 
-// Transactor represents a single wire-level connection to a Tendermint RPC
+// Transactor represents a single wire-level connection to a CometBFT RPC
 // endpoint, and this is responsible for sending transactions to that endpoint.
 type Transactor struct {
 	remoteAddr string  // The full URL of the remote WebSockets endpoint.
@@ -77,7 +76,7 @@ func NewTransactor(remoteAddr string, config *Config) (*Transactor, error) {
 		return nil, fmt.Errorf("failed to connect to remote WebSockets endpoint %s: %s (status code %d)", remoteAddr, resp.Status, resp.StatusCode)
 	}
 	logger := logging.NewLogrusLogger(fmt.Sprintf("transactor[%s]", u.String()))
-	logger.Info("Connected to remote Tendermint WebSockets RPC")
+	logger.Info("Connected to remote CometBFT WebSockets RPC")
 	return &Transactor{
 		remoteAddr:               u.String(),
 		config:                   config,

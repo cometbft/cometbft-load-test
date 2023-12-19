@@ -1,31 +1,31 @@
 package main
 
 import (
-	"github.com/informalsystems/tm-load-test/pkg/loadtest"
+	"github.com/cometbft/cometbft-load-test/pkg/loadtest"
 )
 
-const appLongDesc = `Load testing application for Tendermint with optional coordinator/worker mode.
+const appLongDesc = `Load testing application for CometBFT with optional coordinator/worker mode.
 Generates large quantities of arbitrary transactions and submits those
-transactions to one or more Tendermint endpoints. By default, it assumes that
-you are running the kvstore ABCI application on your Tendermint network.
+transactions to one or more CometBFT endpoints. By default, it assumes that you
+are running the kvstore ABCI application on your CometBFT network.
 
-To run the application in a similar fashion to tm-bench (STANDALONE mode):
-    tm-load-test -c 1 -T 10 -r 1000 -s 250 \
+To run the application in STANDALONE mode:
+    cometbft-load-test -c 1 -T 10 -r 1000 -s 250 \
         --broadcast-tx-method async \
-        --endpoints ws://tm-endpoint1.somewhere.com:26657/websocket,ws://tm-endpoint2.somewhere.com:26657/websocket
+        --endpoints ws://cmt-endpoint1.somewhere.com:26657/websocket,ws://cmt-endpoint2.somewhere.com:26657/websocket
 
 To run the application in COORDINATOR mode:
-    tm-load-test \
+    cometbft-load-test \
         coordinator \
         --expect-workers 2 \
         --bind localhost:26670 \
         --shutdown-wait 60 \
         -c 1 -T 10 -r 1000 -s 250 \
         --broadcast-tx-method async \
-        --endpoints ws://tm-endpoint1.somewhere.com:26657/websocket,ws://tm-endpoint2.somewhere.com:26657/websocket
+        --endpoints ws://cmt-endpoint1.somewhere.com:26657/websocket,ws://cmt-endpoint2.somewhere.com:26657/websocket
 
 To run the application in WORKER mode:
-    tm-load-test worker --coordinator localhost:26680
+    cometbft-load-test worker --coordinator localhost:26680
 
 NOTES:
 * COORDINATOR mode exposes a "/metrics" endpoint in Prometheus plain text
@@ -41,8 +41,8 @@ NOTES:
 
 func main() {
 	loadtest.Run(&loadtest.CLIConfig{
-		AppName:              "tm-load-test",
-		AppShortDesc:         "Load testing application for Tendermint kvstore",
+		AppName:              "cometbft-load-test",
+		AppShortDesc:         "Load testing application for CometBFT kvstore",
 		AppLongDesc:          appLongDesc,
 		DefaultClientFactory: "kvstore",
 	})

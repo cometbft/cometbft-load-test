@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 	"github.com/gorilla/websocket"
-	"github.com/informalsystems/tm-load-test/internal/logging"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -100,35 +100,35 @@ func NewCoordinator(cfg *Config, coordCfg *CoordinatorConfig) *Coordinator {
 		totalTxsPerWorker:   make(map[string]int),
 		totalBytesPerWorker: make(map[string]int64),
 		stateMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_state",
-			Help: "The current state of the tm-load-test coordinator",
+			Name: "cometbftloadtest_coordinator_state",
+			Help: "The current state of the cometbft-load-test coordinator",
 		}),
 		totalTxsMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_total_txs",
+			Name: "cometbftloadtest_coordinator_total_txs",
 			Help: "The total cumulative number of transactions sent by all workers",
 		}),
 		totalBytesMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_total_bytes",
+			Name: "cometbftloadtest_coordinator_total_bytes",
 			Help: "The total cumulative number of bytes of transactions sent by all workers",
 		}),
 		txRateMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_tx_rate",
-			Help: "The current transaction throughput rate (in txs/sec) as seen by the tm-load-test coordinator, summed across all workers",
+			Name: "cometbftloadtest_coordinator_tx_rate",
+			Help: "The current transaction throughput rate (in txs/sec) as seen by the cometbft-load-test coordinator, summed across all workers",
 		}),
 		txDataRateMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_tx_data_rate",
-			Help: "The current transaction throughput rate (in bytes/sec) as seen by the tm-load-test coordinator, summed across all workers",
+			Name: "cometbftloadtest_coordinator_tx_data_rate",
+			Help: "The current transaction throughput rate (in bytes/sec) as seen by the cometbft-load-test coordinator, summed across all workers",
 		}),
 		overallTxRateMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_overall_tx_rate",
-			Help: "The overall transaction throughput rate as seen by the tm-load-test coordinator since the beginning of the load test",
+			Name: "cometbftloadtest_coordinator_overall_tx_rate",
+			Help: "The overall transaction throughput rate as seen by the cometbft-load-test coordinator since the beginning of the load test",
 		}),
 		workersCompletedMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_workers_completed",
+			Name: "cometbftloadtest_coordinator_workers_completed",
 			Help: "The total number of workers that have completed their testing so far",
 		}),
 		testUnderwayMetric: promauto.NewGauge(prometheus.GaugeOpts{
-			Name: "tmloadtest_coordinator_test_underway",
+			Name: "cometbftloadtest_coordinator_test_underway",
 			Help: "The ID of the load test currently underway (-1 if none)",
 		}),
 	}

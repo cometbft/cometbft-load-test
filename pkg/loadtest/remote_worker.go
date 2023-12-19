@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 	"github.com/gorilla/websocket"
-	"github.com/informalsystems/tm-load-test/internal/logging"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 )
@@ -291,15 +291,16 @@ func (rw *remoteWorker) setState(newState workerState) {
 
 func (rw *remoteWorker) createMetrics() {
 	rw.mtx.Lock()
+	defer rw.mtx.Unlock()
+
 	rw.stateMetric = promauto.NewGauge(prometheus.GaugeOpts{
-		Name: fmt.Sprintf("tmloadtest_worker_%s_state", rw.id),
+		Name: fmt.Sprintf("cometbftloadtest_worker_%s_state", rw.id),
 		Help: fmt.Sprintf("The current state of worker %s", rw.id),
 	})
 	rw.stateMetric.Set(workerStateMetricValues[workerAccepted])
 
 	rw.txCountMetric = promauto.NewGauge(prometheus.GaugeOpts{
-		Name: fmt.Sprintf("tmloadtest_worker_%s_total_txs", rw.id),
+		Name: fmt.Sprintf("cometbftloadtest_worker_%s_total_txs", rw.id),
 		Help: fmt.Sprintf("The total number of transactions sent by worker %s", rw.id),
 	})
-	rw.mtx.Unlock()
 }

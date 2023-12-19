@@ -3,35 +3,29 @@ BUILD_DIR ?= $(CURDIR)/build
 .DEFAULT_GOAL := build
 BUILD_FLAGS ?= -mod=readonly
 
-build: build-tm-load-test
+build:
+	@go build $(BUILD_FLAGS) \
+		-ldflags "-X github.com/cometbft/cometbft-load-test/pkg/loadtest.cliVersionCommitID=`git rev-parse --short HEAD`" \
+		-o $(BUILD_DIR)/cometbft-load-test ./cmd/cometbft-load-test/main.go
 .PHONY: build
 
-build-tm-load-test:
-	@go build $(BUILD_FLAGS) \
-		-ldflags "-X github.com/informalsystems/tm-load-test/pkg/loadtest.cliVersionCommitID=`git rev-parse --short HEAD`" \
-		-o $(BUILD_DIR)/tm-load-test ./cmd/tm-load-test/main.go
-.PHONY: build-tm-load-test
-
-build-linux: build-tm-load-test-linux
+build-linux:
+	GOOS=linux GOARCH=amd64 $(MAKE) build
 .PHONY: build-linux
-
-build-tm-load-test-linux:
-	GOOS=linux GOARCH=amd64 $(MAKE) build-tm-load-test
-.PHONY: build-tm-load-test-linux
 
 test:
 	go test -cover -race ./...
 .PHONY: test
 
-# Builds a Docker image called "tendermint/localnode", which is based on
-# Tendermint Core. Takes the current system user and group ID as the user/group
-# IDs for the tmuser user within the container so as to eliminate permissions
+# Builds a Docker image called "cometbft/localnode", which is based on
+# CometBFT. Takes the current system user and group ID as the user/group IDs
+# for the cmtuser user within the container so as to eliminate permissions
 # issues when generating testnet files in the localnet target.
 localnode:
 	@docker build -f ./test/localnode/Dockerfile \
 		--build-arg UID=$(shell id -u) \
 		--build-arg GID=$(shell id -g) \
-		-t tendermint/localnode:latest \
+		-t cometbft/localnode:latest \
 		./test/localnode/
 .PHONY: localnode
 
@@ -40,9 +34,9 @@ localnet: localnode
 		mkdir -p build && \
 		docker run \
 			--rm \
-			-v $(BUILD_DIR):/tendermint:Z \
-			tendermint/localnode \
-			testnet --config /etc/tendermint/config-template.toml --o . --starting-ip-address 192.168.10.2; \
+			-v $(BUILD_DIR):/cometbft:Z \
+			cometbft/localnode \
+			testnet --config /etc/cometbft/config-template.toml --o . --starting-ip-address 192.168.10.2; \
 	fi
 .PHONY: localnet
 

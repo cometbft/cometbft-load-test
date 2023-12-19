@@ -6,13 +6,13 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/informalsystems/tm-load-test/internal/logging"
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 )
 
-// peerInfo is returned when polling the Tendermint RPC endpoint.
+// peerInfo is returned when polling the CometBFT RPC endpoint.
 type peerInfo struct {
 	Addr                string      // The address of the peer itself.
-	Client              *httpClient // The client to use to query this peer's Tendermint RPC endpoint.
+	Client              *httpClient // The client to use to query this peer's CometBFT RPC endpoint.
 	PeerAddrs           []string    // The peers of this peer.
 	SuccessfullyQueried bool        // Has this peer been successfully queried?
 }
@@ -80,7 +80,7 @@ func waitForNetworkPeers(
 	for {
 		remainingTimeout := timeout - time.Since(startTime)
 		if remainingTimeout < 0 {
-			return nil, fmt.Errorf("timed out waiting for Tendermint peer crawl to complete")
+			return nil, fmt.Errorf("timed out waiting for CometBFT peer crawl to complete")
 		}
 		newPeers, err := getNetworkPeers(peers, remainingTimeout, cancelc, logger)
 		if err != nil {
@@ -120,7 +120,7 @@ func getNetworkPeers(
 	peerInfoc := make(chan *peerInfo, len(peers))
 	errc := make(chan error, len(peers))
 	logger.Debug("Querying peers for more peers", "count", len(peers), "peers", getPeerAddrs(peers))
-	// parallelize querying all the Tendermint nodes' peers
+	// parallelize querying all the CometBFT nodes' peers
 	for _, peer := range peers {
 		// reset this every time
 		peer.SuccessfullyQueried = false

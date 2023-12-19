@@ -1,4 +1,4 @@
-module github.com/informalsystems/tm-load-test
+module github.com/cometbft/cometbft-load-test
 
 go 1.20
 
