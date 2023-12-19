@@ -7,8 +7,8 @@ import (
 	"time"
 	"unicode"
 
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 	"github.com/gorilla/websocket"
-	"github.com/informalsystems/tm-load-test/internal/logging"
 	uuid "github.com/satori/go.uuid"
 )
 

@@ -1,9 +1,5 @@
 // This file maintains data structures that correspond to those provided by
-// Tendermint Core. Given that Tendermint Core is being archived, we currently
-// consider it safer to replicate these structures here than rely on the
-// original repository.
-//
-// TODO(thane): Remove and replace with types provided by Informal Systems' fork of Tendermint Core.
+// CometBFT.
 package loadtest
 
 import (
@@ -103,7 +99,7 @@ func (i *JSONDuration) UnmarshalJSON(data []byte) error {
 }
 
 // RPCRequest corresponds to the JSON-RPC request data format accepted by
-// Tendermint Core v0.34.x.
+// CometBFT v0.34.x.
 type RPCRequest struct {
 	JSONRPC string          `json:"jsonrpc"`
 	ID      int             `json:"id,omitempty"`
@@ -125,7 +121,7 @@ type RPCError struct {
 }
 
 // NetInfo corresponds to the JSON-RPC response format produced by the
-// Tendermint Core v0.34.x net_info RPC API.
+// CometBFT v0.34.x net_info RPC API.
 type NetInfo struct {
 	Listening bool       `json:"listening"`
 	Listeners []string   `json:"listeners"`
@@ -142,7 +138,7 @@ type Peer struct {
 }
 
 // DefaultNodeInfo is the basic node information exchanged
-// between two peers during the Tendermint P2P handshake.
+// between two peers during the CometBFT P2P handshake.
 type DefaultNodeInfo struct {
 	ProtocolVersion ProtocolVersion `json:"protocol_version"`
 

@@ -6,13 +6,13 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/informalsystems/tm-load-test/internal/logging"
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
 // CLIVersion must be manually updated as new versions are released.
-const CLIVersion = "v1.3.0"
+const CLIVersion = "v0.1.0"
 
 // cliVersionCommitID must be set through linker settings. See
 // https://stackoverflow.com/a/11355611/1156132 for details.
@@ -55,7 +55,7 @@ func buildCLI(cli *CLIConfig, logger logging.Logger) *cobra.Command {
 	rootCmd.PersistentFlags().IntVarP(&cfg.Size, "size", "s", 250, "The size of each transaction, in bytes - must be greater than 40")
 	rootCmd.PersistentFlags().IntVarP(&cfg.Count, "count", "N", -1, "The maximum number of transactions to send - set to -1 to turn off this limit")
 	rootCmd.PersistentFlags().StringVar(&cfg.BroadcastTxMethod, "broadcast-tx-method", "async", "The broadcast_tx method to use when submitting transactions - can be async, sync or commit")
-	rootCmd.PersistentFlags().StringSliceVar(&cfg.Endpoints, "endpoints", []string{}, "A comma-separated list of URLs indicating Tendermint WebSockets RPC endpoints to which to connect")
+	rootCmd.PersistentFlags().StringSliceVar(&cfg.Endpoints, "endpoints", []string{}, "A comma-separated list of URLs indicating CometBFT WebSockets RPC endpoints to which to connect")
 	rootCmd.PersistentFlags().StringVar(&cfg.EndpointSelectMethod, "endpoint-select-method", SelectSuppliedEndpoints, "The method by which to select endpoints")
 	rootCmd.PersistentFlags().IntVar(&cfg.ExpectPeers, "expect-peers", 0, "The minimum number of peers to expect when crawling the P2P network from the specified endpoint(s) prior to waiting for workers to connect")
 	rootCmd.PersistentFlags().IntVar(&cfg.MaxEndpoints, "max-endpoints", 0, "The maximum number of endpoints to use for testing, where 0 means unlimited")
@@ -117,13 +117,13 @@ func buildCLI(cli *CLIConfig, logger logging.Logger) *cobra.Command {
 
 	versionCmd := &cobra.Command{
 		Use:   "version",
-		Short: "Display the version of tm-load-test and exit",
+		Short: "Display the version of cometbft-load-test and exit",
 		Run: func(cmd *cobra.Command, args []string) {
 			version := CLIVersion
 			if len(cliVersionCommitID) > 0 {
 				version = fmt.Sprintf("%s-%s", version, cliVersionCommitID)
 			}
-			fmt.Println("tm-load-test", version)
+			fmt.Println("cometbft-load-test", version)
 		},
 	}
 
@@ -142,7 +142,7 @@ func initLogLevel(logger logging.Logger) {
 
 // Run must be executed from your `main` function in your Go code. This can be
 // used to fast-track the construction of your own load testing tool for your
-// Tendermint ABCI application.
+// CometBFT ABCI application.
 func Run(cli *CLIConfig) {
 	logger := logging.NewLogrusLogger("main")
 	if err := buildCLI(cli, logger).Execute(); err != nil {

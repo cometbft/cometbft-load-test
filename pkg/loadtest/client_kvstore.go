@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// The Tendermint common.RandStr method can effectively generate human-readable
+// The CometBFT common.RandStr method can effectively generate human-readable
 // (alphanumeric) strings from a set of 62 characters. We aim here with the
 // KVStore client to generate unique client IDs as well as totally unique keys
 // for all transactions. Values are not so important.
@@ -36,7 +36,7 @@ var kvstoreMaxTxsByKeySuffixLen = []uint64{
 }
 
 // KVStoreClientFactory creates load testing clients to interact with the
-// built-in Tendermint kvstore ABCI application.
+// built-in CometBFT kvstore ABCI application.
 type KVStoreClientFactory struct{}
 
 // KVStoreClient generates arbitrary transactions (random key=value pairs) to

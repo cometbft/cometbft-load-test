@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 	"github.com/gorilla/websocket"
-	"github.com/informalsystems/tm-load-test/internal/logging"
 )
 
 const (

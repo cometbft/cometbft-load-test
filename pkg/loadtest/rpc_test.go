@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/informalsystems/tm-load-test/pkg/loadtest"
+	"github.com/cometbft/cometbft-load-test/pkg/loadtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -28,7 +28,7 @@ type Config struct {
 	Size                 int      `json:"size"`                   // The desired size of each generated transaction, in bytes.
 	Count                int      `json:"count"`                  // The maximum number of transactions to send. Set to -1 for unlimited.
 	BroadcastTxMethod    string   `json:"broadcast_tx_method"`    // The broadcast_tx method to use (can be "sync", "async" or "commit").
-	Endpoints            []string `json:"endpoints"`              // A list of the Tendermint node endpoints to which to connect for this load test.
+	Endpoints            []string `json:"endpoints"`              // A list of the CometBFT node endpoints to which to connect for this load test.
 	EndpointSelectMethod string   `json:"endpoint_select_method"` // The method by which to select endpoints for load testing.
 	ExpectPeers          int      `json:"expect_peers"`           // The minimum number of peers to expect before starting a load test. Set to 0 by default (no minimum).
 	MaxEndpoints         int      `json:"max_endpoints"`          // The maximum number of endpoints to use for load testing. Set to 0 by default (no maximum).

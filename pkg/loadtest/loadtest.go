@@ -3,7 +3,7 @@ package loadtest
 import (
 	"time"
 
-	"github.com/informalsystems/tm-load-test/internal/logging"
+	"github.com/cometbft/cometbft-load-test/internal/logging"
 )
 
 // ExecuteStandalone will run a standalone (non-coordinator/worker) load test.

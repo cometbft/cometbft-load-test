@@ -17,7 +17,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/informalsystems/tm-load-test/pkg/loadtest"
+	"github.com/cometbft/cometbft-load-test/pkg/loadtest"
 )
 
 const (
@@ -39,7 +39,7 @@ func testCoordinatorWorkerHappyPath(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	tempDir, err := os.MkdirTemp("", "tmloadtest-coordinatorworkerhappypath")
+	tempDir, err := os.MkdirTemp("", "cometbftloadtest-coordinatorworkerhappypath")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +160,7 @@ func testCoordinatorWorkerHappyPath(t *testing.T) {
 
 func testStandaloneHappyPath(t *testing.T) {
 	t.Log("Running standalone happy path integration test")
-	tempDir, err := os.MkdirTemp("", "tmloadtest-standalonehappypath")
+	tempDir, err := os.MkdirTemp("", "cometbftloadtest-standalonehappypath")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +322,7 @@ func getPrometheusStats(t *testing.T, port int) prometheusStats {
 	}
 	stats := prometheusStats{}
 	for _, line := range strings.Split(string(body), "\n") {
-		if strings.HasPrefix(line, "tmloadtest_coordinator_total_txs") {
+		if strings.HasPrefix(line, "cometbftloadtest_coordinator_total_txs") {
 			parts := strings.Split(line, " ")
 			if len(parts) < 2 {
 				t.Fatal("Invalid Prometheus metrics format")
@@ -332,7 +332,7 @@ func getPrometheusStats(t *testing.T, port int) prometheusStats {
 				t.Fatal(err)
 			}
 
-		} else if strings.HasPrefix(line, "tmloadtest_coordinator_total_bytes") {
+		} else if strings.HasPrefix(line, "cometbftloadtest_coordinator_total_bytes") {
 			parts := strings.Split(line, " ")
 			if len(parts) < 2 {
 				t.Fatal("Invalid Prometheus metrics format")

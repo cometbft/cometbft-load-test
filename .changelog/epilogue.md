@@ -1,14 +1,3 @@
-# CHANGELOG
-
-## v0.1.0
-
-*December 19, 2023*
-
-This is the first release of `cometbft-load-test`, where `tm-load-test` was
-forked and renamed.
-
-Integration testing has been switched to use CometBFT v0.38.2.
-
 ---
 
 `cometbft-load-test` is a fork of
@@ -17,4 +6,3 @@ Integration testing has been switched to use CometBFT v0.38.2.
 
 For changes released prior to the first release of `cometbft-load-test`, please
 see the `tm-load-test` changelog.
-

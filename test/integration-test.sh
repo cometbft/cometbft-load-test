@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# This script is intended to be executed from the root of the tm-load-test
+# This script is intended to be executed from the root of the cometbft-load-test
 # repository.
 
 make localnet-stop || exit 1
