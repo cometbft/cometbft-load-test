@@ -1,11 +1,11 @@
-project_name: tm-load-test
+project_name: cometbft-load-test
 
 env:
   # Require use of Go modules.
   - GO111MODULE=on
 
 builds:
-  - main: ./cmd/tm-load-test/main.go
+  - main: ./cmd/cometbft-load-test/main.go
     goos:
       - linux
       - darwin
