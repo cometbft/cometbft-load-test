@@ -29,8 +29,10 @@ type LogrusLogger struct {
 type NoopLogger struct{}
 
 // LogrusLogger implements Logger
-var _ Logger = (*LogrusLogger)(nil)
-var _ Logger = (*NoopLogger)(nil)
+var (
+	_ Logger = (*LogrusLogger)(nil)
+	_ Logger = (*NoopLogger)(nil)
+)
 
 //
 // LogrusLogger
