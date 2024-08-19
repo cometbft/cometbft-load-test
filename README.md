@@ -12,7 +12,7 @@ apps.
 
 ## Requirements
 
-`cometbft-load-test` is currently tested using Go v1.21 and CometBFT v0.38.
+`cometbft-load-test` is currently tested using Go v1.22 and CometBFT v0.38.
 
 ## Usage
 
