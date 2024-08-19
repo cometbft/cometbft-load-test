@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: echo "GO_VERSION=$(cat .github/workflows/go-version.env | grep GO_VERSION | cut -d '=' -f2)" >> $GITHUB_ENV
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.21"
-          check-latest: true
+          go-version: ${{ env.GO_VERSION }}
       - run: make integration-test
-      - uses: codecov/codecov-action@v4.3.0
+      - uses: codecov/codecov-action@v4.5.0
         with:
           file: ./coverage.txt
