@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.2.0
+
+*August 19, 2024*
+
+This releases updates the dependencies to the latest versions. `satori/go.uuid`
+is replaced with `google/uuid`.
+
 ## v0.1.0
 
 *December 19, 2023*
