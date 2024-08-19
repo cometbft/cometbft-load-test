@@ -8,8 +8,8 @@ import (
 	"unicode"
 
 	"github.com/cometbft/cometbft-load-test/internal/logging"
+	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
-	uuid "github.com/satori/go.uuid"
 )
 
 const (
@@ -321,5 +321,5 @@ func isValidWorkerID(id string) bool {
 }
 
 func makeWorkerID() string {
-	return strings.ReplaceAll(uuid.NewV4().String(), "-", "")
+	return strings.ReplaceAll(uuid.New().String(), "-", "")
 }
