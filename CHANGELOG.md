@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v0.3.0
+
+*August 19, 2024*
+
+This release bumps Go version.
+
+### DEPENDENCIES
+
+- bump Go version from 1.20 to 1.22
+  ([\#35](https://github.com/cometbft/cometbft-load-test/pull/35))
+
 ## v0.2.0
 
 *August 19, 2024*
