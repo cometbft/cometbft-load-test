@@ -56,14 +56,26 @@ bench:
 	go test -bench="Benchmark" -run="notests" ./...
 .PHONY: bench
 
-lint:
-	go run github.com/golangci/golangci-lint/cmd/golangci-lint@latest run
-.PHONY: lint
-
 clean:
 	rm -rf $(BUILD_DIR)
 .PHONY: clean
 
+###############################################################################
+###                  Formatting, linting, and vetting                       ###
+###############################################################################
+
+#? lint: Lint, format and fix typos
+lint: pre-commit
+	@pre-commit run
+.PHONY: lint
+
+#? vulncheck: Run latest govulncheck
 vulncheck:
 	@go run golang.org/x/vuln/cmd/govulncheck@latest ./...
 .PHONY: vulncheck
+
+#? pre-commit: Create pre-commit hook using the pre-commit framework.
+pre-commit:
+	@which pre-commit || pip3 install pre-commit
+	@pre-commit install
+.PHONY: pre-commit
