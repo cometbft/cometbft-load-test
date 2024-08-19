@@ -28,3 +28,5 @@ __pycache__
 venv/
 /deployment/hosts
 coverage.txt
+
+dist/
